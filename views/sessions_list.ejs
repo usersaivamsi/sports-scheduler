@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h2>Available Sessions</h2>
+<table class="table">
+<thead><tr><th>Sport</th><th>Date & Time</th><th>Venue</th><th>Created by</th><th>Players</th><th>Action</th></tr></thead>
+<tbody>
+  <% sessions.forEach(s => { %>
+    <tr>
+      <td><%= s.sport ? s.sport.name : '—' %></td>
+      <td><%= s.dateTime.toLocaleString() %></td>
+      <td><%= s.venue || '-' %></td>
+      <td><%= s.createdBy ? s.createdBy.name : '-' %></td>
+      <td><%= s.players.length %> / <%= s.requiredPlayers || 'N/A' %></td>
+      <td><a href="/sessions/<%= s._id %>" class="btn btn-sm btn-primary">View</a></td>
+    </tr>
+  <% }) %>
+</tbody>
+</table>
+
+<%- include('partials/footer') %>

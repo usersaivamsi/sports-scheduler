@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<h2>Sign up</h2>
+<form method="POST" action="/signup">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input class="form-control" name="name" required/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input class="form-control" name="email" type="email" required/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input class="form-control" name="password" type="password" required/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Role (optional)</label>
+    <select class="form-select" name="role">
+      <option value="player" selected>Player</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Sign up</button>
+</form>
+
+<%- include('partials/footer') %>

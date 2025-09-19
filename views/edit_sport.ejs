@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+
+<h2>Edit Sport</h2>
+<form method="POST" action="/sports/<%= sport._id %>?_method=PUT">
+  <div class="mb-3"><label class="form-label">Name</label><input class="form-control" name="name" value="<%= sport.name %>" required></div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" name="description"><%= sport.description %></textarea></div>
+  <button class="btn btn-primary">Update</button>
+</form>
+
+<%- include('partials/footer') %>

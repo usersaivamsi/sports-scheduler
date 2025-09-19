@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<h2>Reports</h2>
+<form class="row g-2 mb-3" method="GET" action="/reports">
+  <div class="col-auto">
+    <input type="date" name="from" class="form-control" value="<%= from || '' %>">
+  </div>
+  <div class="col-auto">
+    <input type="date" name="to" class="form-control" value="<%= to || '' %>">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary">Filter</button>
+  </div>
+</form>
+
+<p>Total sessions in range: <strong><%= totalSessions %></strong></p>
+
+<h4>Players per sport</h4>
+<ul>
+  <% for (let k in popMap) { %>
+    <li><%= k %> : <%= popMap[k] %> players</li>
+  <% } %>
+</ul>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<h2>My Created Sessions</h2>
+<table class="table">
+<thead><tr><th>Sport</th><th>Date</th><th>Venue</th><th>Players</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>
+  <% mySessions.forEach(s => { %>
+    <tr>
+      <td><%= s.sport ? s.sport.name : '-' %></td>
+      <td><%= s.dateTime.toLocaleString() %></td>
+      <td><%= s.venue %></td>
+      <td><%= s.players.length %></td>
+      <td><%= s.status %> <% if (s.status === 'cancelled') { %> - <%= s.cancellationReason %> <% } %></td>
+      <td>
+        <a class="btn btn-sm btn-primary" href="/sessions/<%= s._id %>">View</a>
+        <% if (s.status === 'active') { %>
+          <form method="POST" action="/sessions/<%= s._id %>/cancel?_method=PUT" style="display:inline">
+            <input name="reason" placeholder="Reason" class="form-control d-inline-block form-control-sm" style="width:250px"/>
+            <button class="btn btn-sm btn-danger">Cancel</button>
+          </form>
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+</tbody>
+</table>
+
+<%- include('partials/footer') %>

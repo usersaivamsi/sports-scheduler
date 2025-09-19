@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<h2>Session Details</h2>
+<p><strong>Sport:</strong> <%= sess.sport ? sess.sport.name : '-' %></p>
+<p><strong>Date & Time:</strong> <%= sess.dateTime.toLocaleString() %></p>
+<p><strong>Venue:</strong> <%= sess.venue %></p>
+<p><strong>Created by:</strong> <%= sess.createdBy ? sess.createdBy.name : '-' %></p>
+<p><strong>Status:</strong> <%= sess.status %></p>
+
+<h4>Players (<%= sess.players.length %>)</h4>
+<ul>
+  <% sess.players.forEach(p => { %>
+    <li><%= p.name %> <% if (p.userId) { %> (registered user) <% } %></li>
+  <% }) %>
+</ul>
+
+<% if (currentUser) { %>
+  <% if (sess.status === 'active' && sess.dateTime > new Date() && !sess.players.some(p => p.userId && p.userId._id && p.userId._id.toString() === currentUser.id)) { %>
+    <form method="POST" action="/sessions/<%= sess._id %>/join">
+      <button class="btn btn-success">Join session</button>
+    </form>
+  <% } %>
+<% } %>
+
+<%- include('partials/footer') %>

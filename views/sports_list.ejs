@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<h2>Sports</h2>
+<table class="table">
+  <thead><tr><th>Name</th><th>Description</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% sports.forEach(s => { %>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= s.description || '-' %></td>
+        <td>
+          <% if (currentUser && currentUser.role === 'admin') { %>
+            <a class="btn btn-sm btn-outline-primary" href="/sports/<%= s._id %>/edit">Edit</a>
+            <form method="POST" action="/sports/<%= s._id %>?_method=DELETE" style="display:inline">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/footer') %>
